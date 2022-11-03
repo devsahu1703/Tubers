@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ytubers | Dashboard{% endblock title %}
+
+{% block navList %}
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'about' %}">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'youtubers' %}">Tubers</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+  </li>
+</ul>
+{% endblock navList %}
+
+{% block content %}
+<main class="contact-us">
+  <div class="banner">
+    <img src="{% static './assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100">
+    <h1 class="text-center">
+      Dashboard
+    </h1>
+  </div>
+
+  <section class="container mt-5">
+    <h2 class="text-center">Welcome to Dashboard</h2>
+    <h4 class="text-center text-white-50">
+      hi, {{ user }}. Hope you are having a good day
+    </h4>
+
+    <div class="table-responsive- mt-3">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">YTubers_name</th>
+            <th scope="col">City</th>
+            <th scope="col">Visit</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for youtuber in requested_youtubers %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ youtuber.tuber_name }}</td>
+            <td>{{ youtuber.city }}</td>
+            <td>
+              <a href="{% url 'youtuber_details' youtuber.tuber_id %}" class="btn btn-accent">Go to Page </a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+</main>
+
+{% endblock content %}
